@@ -39,11 +39,7 @@ register_hooks = {
     nn.Dropout: None,
 }
 
-custom_ops = {
-    models.efficientnet.Conv2dSamePadding: count_convNd,
-}
-
-def profile(model, inputs, custom_ops=custom_ops, verbose=True):
+def profile(model, inputs, custom_ops=None, verbose=True):
     handler_collection = []
 
     def add_hooks(m):
