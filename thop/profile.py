@@ -5,6 +5,7 @@ import torch.nn as nn
 from torch.nn.modules.conv import _ConvNd
 
 from .count_hooks import *
+from .my_modules import *
 
 register_hooks = {
     nn.Conv1d: count_convNd,
