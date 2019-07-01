@@ -11,7 +11,6 @@ register_hooks = {
     nn.Conv1d: count_convNd,
     nn.Conv2d: count_convNd,
     nn.Conv3d: count_convNd,
-    Conv2dSamePadding: count_convNd,
     nn.ConvTranspose2d: count_convtranspose2d,
 
     nn.BatchNorm1d: count_bn,
@@ -40,8 +39,11 @@ register_hooks = {
     nn.Dropout: None,
 }
 
+custom_ops = {
+    models.efficientnet.Conv2dSamePadding: count_convNd,
+}
 
-def profile(model, inputs, custom_ops={}, verbose=True):
+def profile(model, inputs, custom_ops=custom_ops, verbose=True):
     handler_collection = []
 
     def add_hooks(m):
@@ -68,7 +70,6 @@ def profile(model, inputs, custom_ops={}, verbose=True):
         if fn is None:
             if verbose:
                 print("THOP has not implemented counting method for ", m)
-                print(m_type)
         else:
             if verbose:
                 print("Register FLOP counter for module %s" % str(m))
