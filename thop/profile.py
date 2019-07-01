@@ -68,6 +68,7 @@ def profile(model, inputs, custom_ops={}, verbose=True):
         if fn is None:
             if verbose:
                 print("THOP has not implemented counting method for ", m)
+				print(m_type)
         else:
             if verbose:
                 print("Register FLOP counter for module %s" % str(m))
